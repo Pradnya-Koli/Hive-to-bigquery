@@ -24,7 +24,7 @@ object Incremental_Schema
 {        def main(args: Array[String])
         {
 
-       val spark =SparkSession.builder().master("local").config("spark.sql.hive.hiveserver2.jdbc.url","jdbc:hive2://demo-hive-to-b1-m:10000").enableHiveSupport().appName("testing").getOrCreate()
+       val spark =SparkSession.builder().master("local").config("spark.sql.hive.hiveserver2.jdbc.url","jdbc:hive2://demo-hive-to-b2-m:10000").enableHiveSupport().appName("testing").getOrCreate()
        val hive = HiveWarehouseSession.session(spark).build()
        hive.setDatabase("hivedemo")
        val output = hive.executeQuery("select * from products")
