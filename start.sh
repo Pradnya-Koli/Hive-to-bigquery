@@ -53,11 +53,11 @@ read -p "Enter the script number: " script_number
 case "$script_number" in
   "1")
     echo "Executing Historic Migration script..........."
-    python3 multithread.py
+    python3 Batch-historic-load.py
     ;;
   "2")
     echo "Executing Incremental Migration script........"
-    cd /opt/projects
+    cd /opt/Incremental
     sbt run
     ;;
   "3")
