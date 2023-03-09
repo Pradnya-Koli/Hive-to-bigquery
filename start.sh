@@ -27,7 +27,7 @@ else
 fi
 
 # Set another variable
-export from_path="hdfs://demo-hive-to-bq2-m/user/hive/warehouse/hivedemo.db/"
+export from_path="hdfs://demo-hive-to-b2-m/user/hive/warehouse/hivedemo.db/"
 echo "from_path ==>",$from_path
 export to_path="gs://demo-gcs-bq"
 echo "to_path ==>",$to_path
