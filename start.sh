@@ -36,7 +36,7 @@ echo "==> project-Id",$project
 export bucket_name="demo-gcs-bq"
 echo "==>bucket_name",$bucket_name
 export table_id="searce-practice-data-analytics.hive_to_bigquery."
-echo "==>table_id,$table_id
+echo "==>table_id",$table_id
 export dataset_id="searce-practice-data-analytics.hive_to_bigquery."
 echo "==>dataset_id",$dataset_id
 export table_idl="searce-practice-data-analytics.hive_to_bigquery."
