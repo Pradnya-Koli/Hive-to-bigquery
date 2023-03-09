@@ -3,11 +3,10 @@
 
 
 #Follow this steps:-
-CLUSTER_NAME="demo-hive-to-b2"
-gcloud dataproc clusters create $CLUSTER_NAME \
+gcloud dataproc clusters create demo-hive-to-b2 \
 --enable-component-gateway \
---region us-central1 \
---zone us-central1-f \
+--region us-central1  \
+--zone us-central1-f  \
 --master-machine-type n2-standard-4 \
 --master-boot-disk-size 500 \
 --num-workers 2 \
