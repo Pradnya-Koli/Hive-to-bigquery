@@ -18,4 +18,4 @@ cd /opt
 git clone https://github.com/Pradnya-Koli/Hive-to-bigquery.git
 bash prerequisite-installation.sh
 bash auto-conf-setup-incremental.sh
-bash start.sh
+
