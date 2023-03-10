@@ -4,7 +4,7 @@ sudo apt-get install python3-pip
 wget -P /tmp https://repo.anaconda.com/archive/Anaconda3-2019.10-Linux-x86_64.sh
 sh /tmp/Anaconda3-2019.10-Linux-x86_64.sh
 source ~/.bashrc
-
+conda activate
 
 #Follow this steps:-
 gcloud dataproc clusters create demo-hive-to-b2 \
