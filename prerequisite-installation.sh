@@ -8,7 +8,7 @@ sleep 3s
 echo "   activate conda "
 conda activate
 sleep 3s
-echo " Installing all the required packages :
+echo " Installing all the required packages :"
 
 echo "****** ****** installing pandas******* ********"
 pip3 install pandas
