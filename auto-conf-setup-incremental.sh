@@ -1,27 +1,47 @@
 #!/bin/bash
 
 # Define the properties to be added
-PROPERTY_1="<property><name> hive.support.concurrency </name><value> true </value></property>"
-PROPERTY_2="<property><name> hive.txn.manager </name><value> org.apache.hadoop.hive.ql.lockmgr.DbTxnManager </value></property>"
-PROPERTY_3="<property><name> hive.enforce.bucketing </name><value> true value3</value></property>"
-PROPERTY_4="<property><name>hive.exec.dynamic.partition.mode </name><value> nostrict </value></property>"
-# Use xmlstarlet to add the properties to hive-site.xml
-xmlstarlet ed -L -s '//configuration' -t elem -n 'property1' -v "$PROPERTY_1" \
--s '//configuration' -t elem -n 'property2' -v "$PROPERTY_2" \
--s '//configuration' -t elem -n 'property3' -v "$PROPERTY_3" \
--s '//configuration' -t elem -n 'property4' -v "$PROPERTY_4"  /usr/lib/hive/conf/hive-site.xml
+#!/bin/bash
 
-cd /usr/lib/spark/conf
-cp hive-site.xml hive-site.xml.save
-rm hive-site.xml.save
+# Declare an associative array of properties to add
+declare -A properties=(
+    ["hive.support.concurrency"]="true"
+    ["hive.txn.manager"]="org.apache.hadoop.hive.ql.lockmgr.DbTxnManager"
+    ["hive.enforce.bucketing"]="true"
+    ["hive.exec.dynamic.partition.mode"]="nostrict"
+    ["hive.compactor.worker.threads"]="5"
+)
+
+# Path to hive-site.xml
+hive_site="/usr/lib/hive/conf/hive-site.xml"
+
+# Backup the original hive-site.xml
+cp "$hive_site" "${hive_site}.bak"
+
+# Add properties to hive-site.xml if they don't exist already
+for key in "${!properties[@]}"; do
+    value="${properties[$key]}"
+    # Check if the property already exists in hive-site.xml
+    if ! grep -q "<name>${key}</name>" "$hive_site"; then
+        # Create an XML element for the property
+        xml="<property><name>${key}</name><value>${value}</value></property>"
+        # Insert the XML element before the closing </configuration> tag in hive-site.xml
+        sed -i "/<\/configuration>/i \\\t${xml}" "$hive_site"
+        echo "Property ${key} added to $hive_site"
+    else
+        echo "Property ${key} already exists in $hive_site"
+    fi
+done
 
 cd /usr/lib/hive/conf
 cp hive-site.xml  /usr/lib/spark/conf
+
+
 # Define properties to be added or modified in spark-conf
 declare -A properties=(
   ["spark.sql.extensions"]="com.qubole.spark.hiveacid.HiveAcidAutoConvertExtension"
   ["spark.kryo.registrator"]="com.qubole.spark.hiveacid.util.HiveAcidKyroRegistrator"
-  ["spark.sql.hive.hwc.execution.mode"]
+  ["spark.sql.hive.hwc.execution.mode"]="client"
   ["spark.hadoop.hive.metastore.uris"]="thrift://demo-hive-to-b1-m:9083"
 )
 
@@ -30,7 +50,7 @@ for property_name in "${!properties[@]}"; do
   property_value="${properties[$property_name]}"
   
   # Check if property already exists in spark-defaults.conf
-  if grep -q "^$property_name=" /path/to/spark-defaults.conf; then
+  if grep -q "^$property_name=" /usr/lib/spark/conf/spark-defaults.conf; then
     # Modify existing property
     sed -i "s/^$property_name=.*/$property_name=$property_value/" /usr/lib/spark/conf/spark-defaults.conf
   else
