@@ -17,8 +17,6 @@ rm hive-site.xml.save
 
 cd /usr/lib/hive/conf
 cp hive-site.xml  /usr/lib/spark/conf
-
-sudo systemctl restart hive-server2
 # Define properties to be added or modified in spark-conf
 declare -A properties=(
   ["spark.sql.extensions"]="com.qubole.spark.hiveacid.HiveAcidAutoConvertExtension"
