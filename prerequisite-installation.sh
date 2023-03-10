@@ -1,15 +1,4 @@
 echo "****** ****** Starting the setup for hive to bigquery ******* ********"
-sudo apt-get update
-sudo apt-get install python3-pip
-wget -P /tmp https://repo.anaconda.com/archive/Anaconda3-2019.10-Linux-x86_64.sh
-sh /tmp/Anaconda3-2019.10-Linux-x86_64.sh
-source ~/.bashrc
-sleep 3s
-echo "   activate conda "
-conda activate
-sleep 3s
-echo " Installing all the required packages :"
-
 echo "****** ****** installing pandas******* ********"
 pip3 install pandas
 pip3 install findspark
