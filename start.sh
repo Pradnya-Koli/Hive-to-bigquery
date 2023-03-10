@@ -57,7 +57,7 @@ case "$script_number" in
     ;;
   "2")
     echo "Executing Incremental Migration script........"
-    cd /opt/Incremental
+    cd /Incremental
     sbt run
     ;;
   "3")
