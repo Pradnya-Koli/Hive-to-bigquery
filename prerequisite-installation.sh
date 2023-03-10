@@ -10,9 +10,6 @@ sleep 3s
 echo "   activate conda "
 conda activate
 sleep 3s
-echo "   cloning the git repo "
-git clone https://github.com/Pradnya-Koli/Hive-to-bigquery.git
-
 echo " Installing all the required packages :
 
 pip3 install pandas
