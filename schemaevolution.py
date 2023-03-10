@@ -1,4 +1,4 @@
-ort time
+import time
 from google.cloud import bigquery
 import csv
 import os 
