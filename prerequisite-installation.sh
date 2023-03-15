@@ -6,7 +6,6 @@ sh /tmp/Anaconda3-2019.10-Linux-x86_64.sh
 source ~/.bashrc
 conda activate
 echo "****** ****** installing pandas******* ********"
-pip3 install pandas
 pip3 install findspark
 pip3 install pyhive
 pip install thrift
